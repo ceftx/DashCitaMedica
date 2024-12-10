@@ -44,6 +44,13 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        if($request->type =="doctor"){
+            $user->roles()->attach(2);
+        }
+        if($request->type =="patient"){
+            $user->roles()->attach(3);
+        }
+
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
