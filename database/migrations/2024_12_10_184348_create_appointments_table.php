@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\doctor;
-use App\Models\patient;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(doctor::class);
-            $table->foreignIdFor(patient::class);
+            $table->foreignIdFor(Doctor::class);
+            $table->foreignIdFor(Patient::class);
             $table->string('title');
             $table->string('date');
             $table->string('hour');

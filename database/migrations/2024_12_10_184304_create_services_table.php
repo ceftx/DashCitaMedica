@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\specialty;
+use App\Models\Specialty;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(specialty::class);
+            $table->foreignIdFor(Specialty::class);
             $table->string('title');
             $table->timestamps();
         });

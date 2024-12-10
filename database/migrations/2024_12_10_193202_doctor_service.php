@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Doctor;
+use App\Models\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('own_services', function (Blueprint $table) {
-            $table->id();
+        Schema::create('doctor_service', function (Blueprint $table) {
             $table->foreignIdFor(Doctor::class);
-            $table->string('title');
+            $table->foreignIdFor(Service::class);
             $table->integer('price');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('own_services');
+        Schema::dropIfExists('doctor_service');
     }
 };
