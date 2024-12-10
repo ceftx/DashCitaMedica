@@ -1,7 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 
-export default function Dashboard() {
+export default function Dashboard({userRole}) {
     return (
         <AuthenticatedLayout
             header={
@@ -17,6 +18,8 @@ export default function Dashboard() {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             You're logged in!
+
+                            <p>Este es tu role dentro de la app: <span>{userRole}</span></p>
                         </div>
                     </div>
                 </div>
