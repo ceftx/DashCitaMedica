@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Location;
+use App\Models\Specialty;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,4 +63,21 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function profileCompleteDoctor(): \Inertia\Response
+    {
+        $user = User::with(['roles', 'doctor'])->find(Auth::user()->id);
+        $specialties = Specialty::with('services', 'doctors')->get();
+        $locations = Location::all();
+        return Inertia::render(
+            'Profile/CompleteDoctor',
+            [
+                'doctorData' => $user,
+                'specialties' => $specialties,
+                'locations' => $locations
+            ]
+        );
+    }
+
+    public function storeCompleteDoctor() {}
 }

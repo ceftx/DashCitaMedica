@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import { Head } from "@inertiajs/react";
 
-export default function Dashboard({ userRole, appointment }) {
+export default function Dashboard({ userRole, appointment, specialties }) {
     return (
         <AuthenticatedLayout
             header={
@@ -17,10 +17,6 @@ export default function Dashboard({ userRole, appointment }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <p>
-                                Estás logueado como: <span>{userRole}</span>
-                            </p>
-
                             {userRole === "admin" && (
                                 <div>
                                     <h3>Panel de Administrador</h3>
@@ -28,6 +24,34 @@ export default function Dashboard({ userRole, appointment }) {
                                         Aquí puedes gestionar usuarios y citas.
                                     </p>
                                     {/* Agrega más contenido específico para el rol de admin */}
+
+                                    {specialties && specialties.length > 0 ? (
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Especialidades</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {specialties.map(
+                                                    (specialty, index) => (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                {
+                                                                    specialty.title
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    ) : (
+                                        <p>
+                                            No hay Especialidades disponibles.
+                                        </p>
+                                    )}
                                 </div>
                             )}
 
@@ -91,7 +115,35 @@ export default function Dashboard({ userRole, appointment }) {
                                             </tbody>
                                         </table>
                                     ) : (
-                                        <p>No hay citas disponibles.</p>
+                                        <p>No has agendado ninguna cita.</p>
+                                    )}
+
+                                    {specialties && specialties.length > 0 ? (
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Especialidades</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {specialties.map(
+                                                    (specialty, index) => (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                {
+                                                                    specialty.title
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    ) : (
+                                        <p>
+                                            No hay Especialidades disponibles.
+                                        </p>
                                     )}
                                 </div>
                             )}

@@ -38,8 +38,8 @@ export default function Register() {
             {showPatientForm && (
                 <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg dark:bg-gray-800">
                     <form onSubmit={submit}>
+                        <p className="text-white">Register patient</p>
                         <div>
-                            <p className="text-white">Register patient</p>
                             <InputLabel htmlFor="name" value="Name" />
 
                             <TextInput

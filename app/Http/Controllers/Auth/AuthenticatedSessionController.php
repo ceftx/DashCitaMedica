@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if($this->verifyDoctor()){
+            return redirect()->route('completeDoctor');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
@@ -48,5 +53,20 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    private function verifyDoctor()
+    {
+        $user = User::with(['roles', 'doctor'])->find(Auth::user()->id);
+        if ($user->roles->first()->name === 'doctor' && !$this->hasCompleteProfile($user)) {
+            return true;
+        }
+        return false;
+    }
+
+    private function hasCompleteProfile($user)
+    {
+
+        return !empty($user->doctor->location_id) && !empty($user->doctor->specialty_id) && !empty($user->doctor->phone);
     }
 }

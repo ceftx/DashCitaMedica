@@ -12,4 +12,9 @@ class Specialty extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function doctors(): HasMany
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }

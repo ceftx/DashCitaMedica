@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +34,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -44,11 +46,19 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        if($request->type =="doctor"){
+        if ($request->type == "doctor") {
             $user->roles()->attach(2);
+            Doctor::create([
+                'user_id' => $user->id,
+                'phone' => null,
+            ]);
         }
-        if($request->type =="patient"){
+        if ($request->type == "patient") {
             $user->roles()->attach(3);
+            Patient::create([
+                'user_id' => $user->id,
+                'phone' => null,
+            ]);
         }
 
         Auth::login($user);
