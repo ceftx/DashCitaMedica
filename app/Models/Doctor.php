@@ -10,6 +10,7 @@ class Doctor extends Model
         'user_id',
         'location_id',
         'specialty_id',
+        'fullname',
         'phone',
         'status',
     ];

@@ -47,6 +47,7 @@ class UserSeeder extends Seeder
                 DB::table('doctors')->insert([
                     [
                         'user_id' => $user->id,
+                        'fullname' => 'Doctor Doctor',
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ],
@@ -57,6 +58,7 @@ class UserSeeder extends Seeder
                 DB::table('patients')->insert([
                     [
                         'user_id' => $user->id,
+                        'fullname' => 'Patient Patient',
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ],
