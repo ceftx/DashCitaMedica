@@ -49,7 +49,7 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
                                         id="specialty"
                                         name="specialty"
                                         value={data.specialty}
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full text-black"
                                         onChange={(e) =>
                                             setData("specialty", e.target.value)
                                         }
@@ -84,7 +84,7 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
                                         id="location"
                                         name="location"
                                         value={data.location}
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full text-black"
                                         onChange={(e) =>
                                             setData("location", e.target.value)
                                         }
@@ -109,6 +109,13 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
                                         className="mt-2"
                                     />
                                 </div>
+                                <PrimaryButton
+                                                                className="ms-4"
+                                                                disabled={processing}
+                                                            >
+                                                                Submit
+                                                            </PrimaryButton>
+
                             </form>
                         </div>
                     </div>
