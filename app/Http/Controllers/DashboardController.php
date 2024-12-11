@@ -14,13 +14,13 @@ class DashboardController extends Controller
     {
         $role = Auth::user()->roles;
         if($role->first()->name == 'admin'){
-            $appointment = Appointment::all();
+            $appointments = Appointment::all();
         }
         if($role->first()->name == 'doctor'){
-            $appointment = Appointment::all();
+            $appointments = Appointment::all();
         }
         if($role->first()->name == 'patient'){
-            $appointment = Appointment::all();
+            $appointments = Appointment::all();
         }
 
         $specialties = Specialty::with('services', 'doctors')->get();
@@ -29,7 +29,7 @@ class DashboardController extends Controller
             'Dashboard',
             [
                 'userRole' => $role->first()->name,
-                'appointment' => $appointment,
+                'appointments' => $appointments,
                 'specialties' => $specialties,
                 'data' => session('data'),
             ]
