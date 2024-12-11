@@ -5,21 +5,26 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+
 import { Head, useForm } from "@inertiajs/react";
 
 export default function CompleteDoctor({ doctorData, specialties, locations }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        specialty: "",
-        location: "",
-        password: "",
-        password_confirmation: "",
-        type: "patient",
+        specialty: doctorData.doctor.specialty_id || "",
+        location: doctorData.doctor.location_id || "",
+        phone: doctorData.doctor.phone || "",
     });
+
+    // useEffect(() => {
+    //     setData("location", doctorData.id_location || "");
+    // }, [doctorData]);
 
     const submit = (e) => {
         e.preventDefault();
         post(route("completeDoctor"), {
-            onFinish: () => reset("password", "password_confirmation"),
+            // onSuccess: () => (window.location.href = "/dashboard"),
         });
     };
 
@@ -32,7 +37,6 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
             }
         >
             <Head title="Configuraciones Doctor" />
-
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
@@ -109,13 +113,30 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
                                         className="mt-2"
                                     />
                                 </div>
-                                <PrimaryButton
-                                                                className="ms-4"
-                                                                disabled={processing}
-                                                            >
-                                                                Submit
-                                                            </PrimaryButton>
+                                <div>
+                                    <InputLabel htmlFor="Phone" value="Phone" />
 
+                                    <PhoneInput
+                                        international
+                                        defaultCountry="VE"
+                                        className="my-2 text-black"
+                                        value={data.phone}
+                                        onChange={(value) =>
+                                            setData("phone", value)
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.phone}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                <PrimaryButton
+                                    className="ms-4"
+                                    disabled={processing}
+                                >
+                                    Submit
+                                </PrimaryButton>
                             </form>
                         </div>
                     </div>

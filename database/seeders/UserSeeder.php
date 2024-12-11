@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\Hash;
@@ -44,13 +45,21 @@ class UserSeeder extends Seeder
             if ($userData['name'] == "doctor") {
                 $user->roles()->attach(2);
                 DB::table('doctors')->insert([
-                    ['user_id' => $user->id],
+                    [
+                        'user_id' => $user->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ],
                 ]);
             }
             if ($userData['name'] == "patient") {
                 $user->roles()->attach(3);
                 DB::table('patients')->insert([
-                    ['user_id' => $user->id],
+                    [
+                        'user_id' => $user->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ],
                 ]);
             }
         }

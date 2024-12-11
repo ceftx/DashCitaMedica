@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Location::class)->nullable();
             $table->foreignIdFor(Specialty::class)->nullable();
+            $table->string('fullname')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();

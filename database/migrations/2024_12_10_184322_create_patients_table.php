@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->string('fullname')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
         });

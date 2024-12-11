@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Doctor;
 use App\Models\Location;
 use App\Models\Specialty;
 use App\Models\User;
@@ -79,5 +80,19 @@ class ProfileController extends Controller
         );
     }
 
-    public function storeCompleteDoctor() {}
+    public function storeCompleteDoctor(Request $request) {
+
+        $doctor = Doctor::where('user_id', Auth::user()->id)->first();
+
+        $doctor->location_id = $request->location;
+        $doctor->specialty_id = $request->specialty;
+        $doctor->phone = $request->phone;
+
+        $doctor->save();
+
+        $data = [
+            "message" => "Datos Actualizados.",
+        ];
+        return redirect()->route('dashboard')->with('data', $data);
+    }
 }

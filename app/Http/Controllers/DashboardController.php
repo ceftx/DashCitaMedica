@@ -30,7 +30,8 @@ class DashboardController extends Controller
             [
                 'userRole' => $role->first()->name,
                 'appointment' => $appointment,
-                'specialties' => $specialties
+                'specialties' => $specialties,
+                'data' => session('data'),
             ]
         );
     }

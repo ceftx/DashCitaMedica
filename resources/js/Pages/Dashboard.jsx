@@ -2,7 +2,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import { Head } from "@inertiajs/react";
 
-export default function Dashboard({ userRole, appointment, specialties }) {
+export default function Dashboard({
+    userRole,
+    appointment,
+    specialties,
+    data,
+}) {
+    console.log(specialties[2].doctors);
     return (
         <AuthenticatedLayout
             header={
@@ -12,11 +18,11 @@ export default function Dashboard({ userRole, appointment, specialties }) {
             }
         >
             <Head title="Dashboard" />
-
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
+                        {data && <div className="alert alert-success">{data.message}</div>}
                             {userRole === "admin" && (
                                 <div>
                                     <h3>Panel de Administrador</h3>
