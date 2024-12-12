@@ -78,7 +78,7 @@ corre estos comando para instalar dependencias:
     npm install 
 ```
 
-debes crear un '.env'  en la raiz del proyecto, a partir del .env.example. Una vez creado debes ejecutar el comando
+Debes crear un '.env'  en la raiz del proyecto, a partir del .env.example. Una vez creado debes ejecutar el comando
 
 ```bash
     php artisan key:generate
@@ -98,7 +98,7 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
     php artisan migrate
  ```
 
- y para Cargar los datos este:
+ Y para Cargar los datos este:
 
   ```bash
     php artisan db:seed
