@@ -25,7 +25,11 @@ class DashboardController extends Controller
         }
         if ($role->first()->name == 'doctor') {
             $appointments = Appointment::all();
-            $doctor = $user->doctor;
+            $doctor = [
+                'data' => $user->doctor,
+                'specialty' => $user->doctor->specialty,
+                'location' => $user->doctor->location,
+            ] ;
         }
         if ($role->first()->name == 'patient') {
             $appointments = Appointment::all();

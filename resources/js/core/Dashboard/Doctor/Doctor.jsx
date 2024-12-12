@@ -30,8 +30,12 @@ export default function Doctor({ doctor }) {
         <div>
             <h3>Panel de Doctor</h3>
             <p>
-                Status <span>{doctor.status ? "Activo" : "Desactivado"}</span>
+                Status <span className="font-bold">{doctor.data.status ? "Activo" : "Desactivado"} </span>
+                Especialidad <span className="font-bold">{doctor.specialty.title ? doctor.specialty.title : "Sin Asignar"} </span>
+                Ubicación <span className="font-bold">{doctor.location.title ? doctor.location.title : "Sin Asignar"} </span>
+                Telefono <span className="font-bold">{doctor.data.phone ? doctor.data.phone : "Sin Asignar"} </span>
             </p>
+
             <p>Aquí puedes ver tus citas y pacientes.</p>
             <AppointmentsTable appointments={appointments}
                 onScheduleAppointment={handleScheduleAppointment} />
@@ -39,6 +43,7 @@ export default function Doctor({ doctor }) {
                 <Appoint_tab
                     selectedAppointment={selectedAppointment}
                     onClose={handleCloseAppointmentTab}
+                    onUpdate={fetchAppointments}
                 />
             )}
         </div>

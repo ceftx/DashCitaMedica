@@ -6,8 +6,16 @@ export default function ListAppointments({
         <div>
             {appointments && appointments.length > 0 ? (
                 <table>
-                    <thead>{/* ... encabezados anteriores ... */}</thead>
+                    <thead>
+                    <th>Cita</th>
+                            <th>Paciente</th>
+                            <th>Fecha de creación</th>
+                            <th>Fecha Asignada</th>
+                            <th>Hora Asignada</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
 
+                    </thead>
                     <tbody>
                         {appointments.map((appointment, index) => (
                             <tr key={index}>
@@ -15,7 +23,7 @@ export default function ListAppointments({
 
                                 <td>{appointment.patient?.fullname}</td>
 
-                                <td>{appointment.created_at}</td>
+                                <td>{new Date(appointment.created_at).toLocaleString()}</td>
 
                                 <td>
                                     {appointment.hour
@@ -32,20 +40,36 @@ export default function ListAppointments({
                                 <td>{appointment.status}</td>
 
                                 <td>
-                                    <button
-                                        onClick={() =>
-                                            onScheduleAppointment(appointment)
-                                        }
-                                    >
-                                        Agendar
-                                    </button>
+                                    {appointment.status == "pending" ? (
+                                        <button
+                                        className="rounded p-2 bg-blue-500 text-white ms-2"
+                                            onClick={() =>
+                                                onScheduleAppointment(
+                                                    appointment
+                                                )
+                                            }
+                                        >
+                                            Agendar
+                                        </button>
+                                    ) : (
+                                        <button
+                                        className="rounded p-2 bg-blue-500 text-white ms-2"
+                                            onClick={() =>
+                                                onScheduleAppointment(
+                                                    appointment
+                                                )
+                                            }
+                                        >
+                                            Reagendar
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             ) : (
-                <p>No has agendado ninguna cita.</p>
+                <p>No han solicitado agendar alguna cita.</p>
             )}
         </div>
     );

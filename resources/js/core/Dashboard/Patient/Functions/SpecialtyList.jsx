@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-
 export default function SpecialtyList({ onAppointmentCreated }) {
     const [specialties, setSpecialties] = useState([]);
     const [expandedSpecialty, setExpandedSpecialty] = useState(null);
@@ -99,33 +98,32 @@ export default function SpecialtyList({ onAppointmentCreated }) {
                                         availableDoctors.map(
                                             (doctor, doctorIndex) => (
                                                 <div
-                                                    className="fs-3x bg-indigo-500"
+                                                    className="fs-3x ms-4"
                                                     key={doctorIndex}
                                                 >
                                                     {doctor.fullname
                                                         ? doctor.fullname
                                                         : "Nombre no disponible"}
 
-                                                    <div>
-                                                        <button
-                                                            onClick={() =>
-                                                                handleRequestAppointment(
-                                                                    doctor.id
-                                                                )
-                                                            }
-                                                            disabled={
-                                                                loadingAppointment[
-                                                                    doctor.id
-                                                                ]
-                                                            }
-                                                        >
-                                                            {loadingAppointment[
+                                                    <button
+                                                    className="rounded p-2 bg-green-500 text-white ms-2"
+                                                        onClick={() =>
+                                                            handleRequestAppointment(
+                                                                doctor.id
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            loadingAppointment[
                                                                 doctor.id
                                                             ]
-                                                                ? "Solicitando..."
-                                                                : "Solicitar Cita"}
-                                                        </button>
-                                                    </div>
+                                                        }
+                                                    >
+                                                        {loadingAppointment[
+                                                            doctor.id
+                                                        ]
+                                                            ? "Solicitando..."
+                                                            : "Solicitar Cita"}
+                                                    </button>
                                                 </div>
                                             )
                                         )

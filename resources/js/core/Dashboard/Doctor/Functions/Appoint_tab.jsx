@@ -1,10 +1,14 @@
 import { useState } from "react";
 
 import Datepicker from "tailwind-datepicker-react";
-
+import { toast } from "react-toastify";
 import { router } from "@inertiajs/react";
 
-export default function Appoint_tab({ selectedAppointment, onClose }) {
+export default function Appoint_tab({
+    selectedAppointment,
+    onClose,
+    onUpdate,
+}) {
     const [show, setShow] = useState(false);
 
     const [selectedDate, setSelectedDate] = useState(null);
@@ -16,6 +20,9 @@ export default function Appoint_tab({ selectedAppointment, onClose }) {
     const options = {
         // ... (configuración previa)
 
+        defaultDate: selectedAppointment?.date
+            ? new Date(selectedAppointment.date)
+            : new Date(),
         defaultDate: selectedAppointment?.date
             ? new Date(selectedAppointment.date)
             : new Date(),
@@ -37,8 +44,7 @@ export default function Appoint_tab({ selectedAppointment, onClose }) {
         // Validar que se haya seleccionado fecha y hora
 
         if (!selectedDate || !selectedTime) {
-            alert("Por favor, selecciona fecha y hora");
-
+            toast.error("Por favor, selecciona fecha y hora");
             return;
         }
 
@@ -57,8 +63,8 @@ export default function Appoint_tab({ selectedAppointment, onClose }) {
             },
             {
                 onSuccess: () => {
-                    alert("Cita agendada exitosamente");
-
+                    toast.success("Cita agendada exitosamente");
+                    onUpdate();
                     onClose(); // Cerrar el modal o resetear la selección
                 },
 
