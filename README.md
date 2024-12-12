@@ -104,6 +104,8 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
     php artisan db:seed
  ```
 
+ Ahora simplemente falta ejecutar en una terminal, 'php artisan serve' y en otra 'npm run dev', y podremos disponer de un servidor local corriendo la app Laravel.
+
  ## System Funcionality
 
  Para entender el flujo de programa ten en cuenta estas 3 entidades (doctor, administrador, paciente), en ese orden en particular.
