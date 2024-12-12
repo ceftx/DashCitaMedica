@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Doctor
     Route::get('/completeDoctor', [ProfileController::class, 'profileCompleteDoctor'])->name('completeDoctor');
     Route::post('/completeDoctor', [ProfileController::class, 'storeCompleteDoctor']);
+    Route::put('/appointments/{appointment}/schedule', [AppointmentController::class, 'schedule']);
 
     //patient
     Route::post('/patient/new/appointment', [AppointmentController::class, 'newAppointment']);
@@ -49,6 +50,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/get/Specialties', [AppointmentController::class, 'getSpecialties'])->name('get.specialties');
 
 });
-
 
 require __DIR__ . '/auth.php';

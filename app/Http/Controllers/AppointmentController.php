@@ -112,4 +112,20 @@ class AppointmentController extends Controller
         $data = Specialty::with('services', 'doctors')->get();
         return response()->json($data);
     }
+
+    public function schedule(Request $request, Appointment $appointment)
+    {
+        $validatedData = $request->validate([
+            'date' => 'required|date',
+            'hour' => 'required|date_format:H:i'
+        ]);
+
+        $appointment->update([
+            'date' => $validatedData['date'],
+            'hour' => $validatedData['hour'],
+            'status' => 'approved' // Opcional: cambiar estado
+        ]);
+
+        return back()->with('success', 'Cita agendada exitosamente');
+    }
 }

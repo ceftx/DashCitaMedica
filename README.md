@@ -64,3 +64,50 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## Install 
+
+### Dependencias y .env
+
+corre estos comando para instalar dependencias:
+
+```bash
+    composer install
+    npm install 
+```
+
+debes crear un '.env'  en la raiz del proyecto, a partir del .env.example. Una vez creado debes ejecutar el comando
+
+```bash
+    php artisan key:generate
+```
+
+Para genera la APP_KEY de tu  aplicacion local Laravel.
+
+ ### Database
+
+ Recuerda tener activada en tu /etc/php/php.ini, la extension pdo_psqlite, para que puedas ejecutar las migraciones directamente dentro de una base de datos sqlite.
+
+ NOTA: puedes colocar el driver de base de datos que gustes.
+
+ Para ejecutar las migraciones debes corre este comando:
+
+ ```bash
+    php artisan migrate
+ ```
+
+ y para Cargar los datos este:
+
+  ```bash
+    php artisan db:seed
+ ```
+
+ ## System Funcionality
+
+ Para entender el flujo de programa ten en cuenta estas 3 entidades (doctor, administrador, paciente), en ese orden en particular.
+
+ Una vez se crea un doctor, el doctor debe configurar su perfil seleccionando una especialidad, ubicacion e ingresando su número de telefono. Ahora el doctor debe esperar que el administrador pueda autorizar su perfil, para que pueda ser mostrado a los pacientes.
+
+ Cuando el administrador autoriza al doctor, el paciente puede hacer solicitud de cita. por lo que le aparece en pantalla las citas pendientes, y a posterior el doctor puede agendar o reagendar la cita, a la fecha y hora que desee. Con ello cambiando el estado de la cita de pendiente a aprovada.
