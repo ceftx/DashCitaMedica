@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,14 +13,21 @@ class DashboardController extends Controller
 {
     public function index(): \Inertia\Response
     {
-        $role = Auth::user()->roles;
-        if($role->first()->name == 'admin'){
+        $user =  Auth::user();
+        $role = $user->roles;
+        $admin = '';
+        $doctor = '';
+        if ($role->first()->name == 'admin') {
             $appointments = Appointment::all();
+            $admin = [
+                // 'doctors' => Doctor::with('specialty','location')->get(),
+            ];
         }
-        if($role->first()->name == 'doctor'){
+        if ($role->first()->name == 'doctor') {
             $appointments = Appointment::all();
+            $doctor = $user->doctor;
         }
-        if($role->first()->name == 'patient'){
+        if ($role->first()->name == 'patient') {
             $appointments = Appointment::all();
         }
 
@@ -28,9 +36,10 @@ class DashboardController extends Controller
         return Inertia::render(
             'Dashboard',
             [
+                'admin' => $admin,
+                'doctor' => $doctor,
                 'userRole' => $role->first()->name,
-                'appointments' => $appointments,
-                'specialties' => $specialties,
+                'specialties_controller' => $specialties,
                 'data' => session('data'),
             ]
         );

@@ -1,4 +1,3 @@
-
 export default function ListAppointments({ appointments }) {
     return (
         <div>
@@ -7,13 +6,21 @@ export default function ListAppointments({ appointments }) {
                     <thead>
                         <tr>
                             <th>Cita</th>
+                            <th>Doctor</th>
+                            <th>Paciente</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {appointments.map((appt, index) => (
+                        {appointments.map((appointment, index) => (
                             <tr key={index}>
-                                <td>{appt}</td>
+                                <td>{appointment.id}</td>
+                                <td>{appointment.doctor?.fullname}</td>
+                                <td>{appointment.patient?.fullname}</td>
+                                <td>{appointment.date}</td>
+                                <td>{appointment.status}</td>
                             </tr>
                         ))}
                     </tbody>

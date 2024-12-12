@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -22,14 +24,30 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::get('/send-event', function () {
+    event(new \App\Events\MyEvent('Test message from Laravel'));
+    return 'Event sent!';
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //Admin
+    Route::post('/doctors/{doctorId}/toggle-status', [AdminController::class, 'toggleStatus']);
+    Route::get('/get/Doctors', [AdminController::class, 'getDoctors'])->name('get.doctors');
+
+    //Doctor
     Route::get('/completeDoctor', [ProfileController::class, 'profileCompleteDoctor'])->name('completeDoctor');
     Route::post('/completeDoctor', [ProfileController::class, 'storeCompleteDoctor']);
+
+    //patient
+    Route::post('/patient/new/appointment', [AppointmentController::class, 'newAppointment']);
+    Route::get('/get/Appointments', [AppointmentController::class, 'getAppoinments'])->name('get.appoinments');
+    Route::get('/get/Specialties', [AppointmentController::class, 'getSpecialties'])->name('get.specialties');
+
 });
 
 

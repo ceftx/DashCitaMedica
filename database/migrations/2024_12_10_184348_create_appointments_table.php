@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Doctor::class);
             $table->foreignIdFor(Patient::class);
-            $table->string('title');
-            $table->string('date');
-            $table->string('hour');
+            $table->enum('status', ['pending', 'approved'])->default('pending');
+            $table->string('title_doctor')->nullable();
+            $table->string('title_patient')->nullable();
+            $table->date('date')->nullable();
+            $table->time('hour')->nullable();
             $table->timestamps();
         });
     }
