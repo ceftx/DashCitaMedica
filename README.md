@@ -116,7 +116,6 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
 
 ## Acounts test
 
-
-admin@admin.com admin - cuenta y clave.
-doctor@doctor.com doctor - cuenta y clave.
-patient@patient.com patient - cuenta y clave.
+- admin@admin.com admin / cuenta y clave.
+- doctor@doctor.com doctor / cuenta y clave.
+- patient@patient.com patient / cuenta y clave.
