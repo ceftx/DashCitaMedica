@@ -113,3 +113,10 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
  Una vez se crea un doctor, el doctor debe configurar su perfil seleccionando una especialidad, ubicacion e ingresando su número de telefono. Ahora el doctor debe esperar que el administrador pueda autorizar su perfil, para que pueda ser mostrado a los pacientes.
 
  Cuando el administrador autoriza al doctor, el paciente puede hacer solicitud de cita. por lo que le aparece en pantalla las citas pendientes, y a posterior el doctor puede agendar o reagendar la cita, a la fecha y hora que desee. Con ello cambiando el estado de la cita de pendiente a aprovada.
+
+## Acounts test
+
+
+admin@admin.com admin - cuenta y clave.
+doctor@doctor.com doctor - cuenta y clave.
+patient@patient.com patient - cuenta y clave.
