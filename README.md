@@ -88,6 +88,8 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
 
  ### Database
 
+![dbDashCitaMedica drawio](https://github.com/user-attachments/assets/fde4899f-c51d-4200-8e45-c9881acf2686)
+
  Recuerda tener activada en tu /etc/php/php.ini, la extension pdo_psqlite, para que puedas ejecutar las migraciones directamente dentro de una base de datos sqlite.
 
  NOTA: puedes colocar el driver de base de datos que gustes.
