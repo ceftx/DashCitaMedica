@@ -92,7 +92,7 @@ Para genera la APP_KEY de tu  aplicacion local Laravel.
 
  Recuerda tener activada en tu /etc/php/php.ini, la extension pdo_psqlite, para que puedas ejecutar las migraciones directamente dentro de una base de datos sqlite.
 
- NOTA: puedes colocar el driver de base de datos que gustes('esto se modifica en el DB_DRIVER en el .env').
+ NOTA: puedes colocar el driver de base de datos que gustes('esto se modifica en el DB_CONNECTION en el .env').
 
  Para ejecutar las migraciones debes corre este comando:
 
