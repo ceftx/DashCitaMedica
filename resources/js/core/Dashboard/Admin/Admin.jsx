@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 export default function Admin({}) {
     const [appointments, setAppointments] = useState([]);
-    // const [specialties, setSpecialties] = useState(specialties_controller);
 
     const fetchAppointments = async () => {
         try {

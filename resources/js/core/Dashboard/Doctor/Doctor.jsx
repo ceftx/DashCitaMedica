@@ -62,6 +62,14 @@ export default function Doctor({ specialties, locations }) {
                     <h3>Panel de Doctor</h3>
 
                     <p>
+                    Nombre Completo{" "}
+                        <span className="font-bold">
+                            {doctor.main && doctor.main.fullname
+                                ? doctor.main.fullname
+                                : "Sin Asignar"}{" "}
+                        </span>
+                        <br />
+
                         Status{" "}
                         <span className="font-bold">
                             {doctor.main && doctor.main.status

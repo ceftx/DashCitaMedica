@@ -116,17 +116,14 @@ class ProfileController extends Controller
         $id = $request->doctor_id;
         $doctor = Doctor::findOrFail($id);
 
+        $doctor->fullname = $request->fullname;
         $doctor->location_id = $request->location;
         $doctor->specialty_id = $request->specialty;
         $doctor->phone = $request->phone;
 
         $doctor->save();
 
-        $data_session = [
-            "message" => "Datos Actualizados.",
-        ];
-        return redirect()->route('dashboard')->with('data_session', $data_session);
-        dd($request);
-        return 'hola';
+        $message = "Datos de Doctor Actualizados.";
+        return $message;
     }
 }

@@ -4,7 +4,7 @@ import axios from "axios";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-export default function UpdateDataDoctor({ doctor, specialties, locations }) {
+export default function UpdateDataDoctor({ doctor, specialties, locations, onUpdate }) {
     const [data, setData] = useState({
         doctor_id: doctor.id || "",
         fullname: doctor.fullname || "",
@@ -35,6 +35,7 @@ export default function UpdateDataDoctor({ doctor, specialties, locations }) {
             }
         } finally {
             setProcessing(false);
+            onUpdate();
         }
     };
 

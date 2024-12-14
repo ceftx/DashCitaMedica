@@ -57,7 +57,7 @@ export default function Dashboard({
                             )}
 
                             {userRole === "patient" && (
-                                <Patient />
+                                <Patient specialties={specialties}/>
                             )}
                         </div>
                     </div>
