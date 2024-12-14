@@ -12,11 +12,10 @@ import DashboardWidget from "@/core/Widget/DashboardWidget";
 
 
 export default function Dashboard({
-    admin,
-    doctor,
     userRole,
-    specialties_controller,
-    data,
+    specialties,
+    locations,
+    data_session,
 }) {
 
     return (
@@ -43,9 +42,9 @@ export default function Dashboard({
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className=" bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            {data && (
+                            {data_session && (
                                 <div className="alert alert-success">
-                                    {data.message}
+                                    {data_session.message}
                                 </div>
                             )}
                             {/* <DashboardWidget /> */}
@@ -54,11 +53,11 @@ export default function Dashboard({
                             )}
 
                             {userRole === "doctor" && (
-                                <Doctor doctor={doctor} />
+                                <Doctor specialties={specialties} locations={locations}/>
                             )}
 
                             {userRole === "patient" && (
-                                <Patient specialties_controller={specialties_controller}/>
+                                <Patient />
                             )}
                         </div>
                     </div>

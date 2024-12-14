@@ -80,7 +80,8 @@ class ProfileController extends Controller
         );
     }
 
-    public function storeCompleteDoctor(Request $request) {
+    public function storeCompleteDoctor(Request $request)
+    {
 
         $doctor = Doctor::where('user_id', Auth::user()->id)->first();
 
@@ -90,9 +91,42 @@ class ProfileController extends Controller
 
         $doctor->save();
 
-        $data = [
+        $data_session = [
             "message" => "Datos Actualizados.",
         ];
-        return redirect()->route('dashboard')->with('data', $data);
+        return redirect()->route('dashboard')->with('data_session', $data_session);
+    }
+
+
+    public function DataDoctor()
+    {
+        $doctor =  [
+            'main' => Auth::user()->doctor,
+            'specialty' =>  Auth::user()->doctor->specialty,
+            'location' =>  Auth::user()->doctor->location
+        ];
+        $data = [
+            'doctor' => $doctor,
+        ];
+        return $data;
+    }
+
+    public function DoctorFormUpdate(Request $request) {
+
+        $id = $request->doctor_id;
+        $doctor = Doctor::findOrFail($id);
+
+        $doctor->location_id = $request->location;
+        $doctor->specialty_id = $request->specialty;
+        $doctor->phone = $request->phone;
+
+        $doctor->save();
+
+        $data_session = [
+            "message" => "Datos Actualizados.",
+        ];
+        return redirect()->route('dashboard')->with('data_session', $data_session);
+        dd($request);
+        return 'hola';
     }
 }

@@ -40,9 +40,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/get/Doctors', [AdminController::class, 'getDoctors'])->name('get.doctors');
 
     //Doctor
-    Route::get('/completeDoctor', [ProfileController::class, 'profileCompleteDoctor'])->name('completeDoctor');
+    Route::get('/completeDoctor', [ProfileController::class, 'profileCompleteDoctor'])->name('doctor.profile.complete');
     Route::post('/completeDoctor', [ProfileController::class, 'storeCompleteDoctor']);
     Route::put('/appointments/{appointment}/schedule', [AppointmentController::class, 'schedule']);
+    Route::get('/DoctorData', [ProfileController::class, 'DataDoctor'])->name('doctor.profile.data');
+    Route::post('/DoctorFormUpdate', [ProfileController::class, 'DoctorFormUpdate'])->name('doctor.profile.update');
 
     //patient
     Route::post('/patient/new/appointment', [AppointmentController::class, 'newAppointment']);
