@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if($this->verifyDoctor()){
-            return redirect()->route('completeDoctor');
+            return redirect()->route('doctor.profile.complete');
         }
 
         return redirect()->intended(route('dashboard', absolute: false));

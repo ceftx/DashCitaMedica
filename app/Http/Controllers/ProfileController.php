@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Doctor;
+use App\Models\DoctorService;
 use App\Models\Location;
 use App\Models\Specialty;
 use App\Models\User;
@@ -103,7 +104,8 @@ class ProfileController extends Controller
         $doctor =  [
             'main' => Auth::user()->doctor,
             'specialty' =>  Auth::user()->doctor->specialty,
-            'location' =>  Auth::user()->doctor->location
+            'location' =>  Auth::user()->doctor->location,
+            'services' => Auth::user()->doctor->services,
         ];
         $data = [
             'doctor' => $doctor,
@@ -115,6 +117,8 @@ class ProfileController extends Controller
 
         $id = $request->doctor_id;
         $doctor = Doctor::findOrFail($id);
+
+        $doctor->services()->detach();
 
         $doctor->fullname = $request->fullname;
         $doctor->location_id = $request->location;

@@ -4,6 +4,7 @@ import AppointmentsTable from "./Tables/AppointmentsTable";
 
 import { useState, useEffect } from "react";
 
+
 export default function Patient({specialties}) {
     const [appointments, setAppointments] = useState([]);
 

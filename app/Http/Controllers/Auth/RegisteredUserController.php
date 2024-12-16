@@ -52,6 +52,8 @@ class RegisteredUserController extends Controller
                 'user_id' => $user->id,
                 'phone' => null,
             ]);
+            Auth::login($user);
+            return redirect()->route('doctor.profile.complete');
         }
         if ($request->type == "patient") {
             $user->roles()->attach(3);
@@ -59,10 +61,8 @@ class RegisteredUserController extends Controller
                 'user_id' => $user->id,
                 'phone' => null,
             ]);
+            Auth::login($user);
+            return redirect(route('dashboard', absolute: false));
         }
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
     }
 }

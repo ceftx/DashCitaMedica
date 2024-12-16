@@ -1,3 +1,4 @@
+import { MdiMenuDown as IconMenuDown } from "@/Icons/menuDown";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -11,6 +12,7 @@ export default function SpecialtyList({ onAppointmentCreated }) {
         try {
             const response = await axios.get("/get/Specialties");
             setSpecialties(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error("Error al cargar citas", error);
             toast.error("Error al cargar citas");
@@ -27,21 +29,16 @@ export default function SpecialtyList({ onAppointmentCreated }) {
 
     const handleRequestAppointment = async (doctorId) => {
         try {
-            // Iniciar estado de carga para este doctor
             setLoadingAppointment((prev) => ({
                 ...prev,
                 [doctorId]: true,
             }));
-            // Hacer la petición para crear la cita
             const response = await axios.post("/patient/new/appointment", {
                 doctor_id: doctorId,
             });
-            // Mostrar mensaje de éxito
+
             toast.success("Cita solicitada correctamente");
-            // Llamar a la función para recargar citas
-            if (onAppointmentCreated) {
-                onAppointmentCreated();
-            }
+            onAppointmentCreated();
         } catch (error) {
             // Manejar errores
             toast.error(
@@ -78,10 +75,26 @@ export default function SpecialtyList({ onAppointmentCreated }) {
                 filteredSpecialties.map((specialty, index) => (
                     <div key={index}>
                         <button
+                            className="flex text-white bg-gray-600 rounded px-2 py-2 mb-2"
                             onClick={() => handleSpecialtyClick(specialty.id)}
                             style={{ cursor: "pointer" }} // Cambia el cursor al pasar sobre el título
                         >
                             {specialty.title}
+
+                            <span className="counter bg-white text-gray-800 px-2 ms-2">
+                                {
+                                    specialty.doctors.filter(
+                                        (doctor) => doctor.status !== 0
+                                    ).length
+                                }
+                            </span>
+                            <span>
+                                <IconMenuDown
+                                    icon="mdi:menu-down"
+                                    width="24"
+                                    height="24"
+                                />
+                            </span>
                         </button>
                         {expandedSpecialty === specialty.id && (
                             <div>
@@ -98,32 +111,82 @@ export default function SpecialtyList({ onAppointmentCreated }) {
                                         availableDoctors.map(
                                             (doctor, doctorIndex) => (
                                                 <div
-                                                    className="fs-3x ms-4"
+                                                    className="fs-3x ms-4 bg-slate-700 rounded text-white p-2 mb-2 flex"
                                                     key={doctorIndex}
                                                 >
-                                                    {doctor.fullname
-                                                        ? doctor.fullname
-                                                        : "Nombre no disponible"}
-
-                                                    <button
-                                                    className="rounded p-2 bg-green-500 text-white ms-2"
-                                                        onClick={() =>
-                                                            handleRequestAppointment(
-                                                                doctor.id
-                                                            )
-                                                        }
-                                                        disabled={
-                                                            loadingAppointment[
-                                                                doctor.id
-                                                            ]
-                                                        }
-                                                    >
-                                                        {loadingAppointment[
-                                                            doctor.id
-                                                        ]
-                                                            ? "Solicitando..."
-                                                            : "Solicitar Cita"}
-                                                    </button>
+                                                    <div className="flex-grow-0 me-2 my-auto">
+                                                        <img
+                                                            className="h-20 photo-doctor"
+                                                            src="/resources/img/default-user.jpg"
+                                                            alt="photo Doctor"
+                                                        />
+                                                    </div>
+                                                    <div className="flex-grow flex flex-col">
+                                                        <div className="">
+                                                            <h4 className="text-2xl">
+                                                                {doctor.fullname
+                                                                    ? doctor.fullname
+                                                                    : "Nombre no disponible"}{" "}
+                                                                /{" "}
+                                                                {
+                                                                    specialty.title
+                                                                }
+                                                            </h4>
+                                                        </div>
+                                                        <div>
+                                                            {specialty.services.map(
+                                                                (service) => {
+                                                                    const doctorService =
+                                                                        doctor.doctor_services.find(
+                                                                            (
+                                                                                ds
+                                                                            ) =>
+                                                                                ds.service_id ===
+                                                                                service.id
+                                                                        );
+                                                                    return (
+                                                                        <div
+                                                                            key={
+                                                                                service.id
+                                                                            }
+                                                                        >
+                                                                            <span>
+                                                                                {
+                                                                                    service.title
+                                                                                }
+                                                                                {doctorService &&
+                                                                                doctorService.price
+                                                                                    ? ` - Precio: ${doctorService.price}.`
+                                                                                    : "."}
+                                                                            </span>
+                                                                        </div>
+                                                                    );
+                                                                }
+                                                            )}
+                                                        </div>
+                                                        <div className="flex justify-end">
+                                                            <button
+                                                                className="rounded p-2 bg-green-500 text-white ms-2"
+                                                                onClick={() =>
+                                                                    handleRequestAppointment(
+                                                                        doctor.id
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    loadingAppointment[
+                                                                        doctor
+                                                                            .id
+                                                                    ]
+                                                                }
+                                                            >
+                                                                {loadingAppointment[
+                                                                    doctor.id
+                                                                ]
+                                                                    ? "Solicitando..."
+                                                                    : "Solicitar Cita"}
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             )
                                         )

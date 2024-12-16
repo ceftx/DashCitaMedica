@@ -109,7 +109,7 @@ class AppointmentController extends Controller
 
     public function getSpecialties(): JsonResponse
     {
-        $data = Specialty::with('services', 'doctors')->get();
+        $data = Specialty::with('services', 'doctors.doctorServices')->get();
         return response()->json($data);
     }
 
@@ -117,7 +117,7 @@ class AppointmentController extends Controller
     {
         $validatedData = $request->validate([
             'date' => 'required|date',
-            'hour' => 'required|date_format:H:i'
+            'hour' => 'required|date_format:h:i A'
         ]);
 
         $appointment->update([

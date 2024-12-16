@@ -14,6 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('doctor_service', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(Doctor::class);
             $table->foreignIdFor(Service::class);
             $table->integer('price');

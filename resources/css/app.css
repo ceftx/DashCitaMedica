@@ -102,3 +102,10 @@ body {
 
     margin-bottom: 20px;
 }
+
+.counter{
+    border-radius: 999999px;
+}
+.photo-doctor{
+    border-radius:50%;
+}

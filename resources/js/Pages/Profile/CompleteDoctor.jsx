@@ -23,7 +23,7 @@ export default function CompleteDoctor({ doctorData, specialties, locations }) {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("completeDoctor"), {
+        post(route("doctor.profile.complete"), {
             // onSuccess: () => (window.location.href = "/dashboard"),
         });
     };

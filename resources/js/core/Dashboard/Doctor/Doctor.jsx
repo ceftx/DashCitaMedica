@@ -5,6 +5,8 @@ import axios from "axios";
 import AppointmentsTable from "./Tables/AppointmentsTable";
 import Appoint_tab from "./Functions/Appoint_tab";
 import UpdateDataDoctor from "./Functions/UpdateDataDoctor";
+import DoctorServiceForm from "./Functions/DoctorServiceForm";
+import ServicesTable from "./Tables/ServicesTable";
 
 export default function Doctor({ specialties, locations }) {
     const [isLoadingDoctor, setIsLoadingDoctor] = useState(false);
@@ -62,14 +64,13 @@ export default function Doctor({ specialties, locations }) {
                     <h3>Panel de Doctor</h3>
 
                     <p>
-                    Nombre Completo{" "}
+                        Nombre Completo{" "}
                         <span className="font-bold">
                             {doctor.main && doctor.main.fullname
                                 ? doctor.main.fullname
                                 : "Sin Asignar"}{" "}
                         </span>
                         <br />
-
                         Status{" "}
                         <span className="font-bold">
                             {doctor.main && doctor.main.status
@@ -105,6 +106,16 @@ export default function Doctor({ specialties, locations }) {
                             locations={locations}
                             onUpdate={fetchDataDoctor}
                         />
+                    )}
+                    {doctor.main && (
+                        <DoctorServiceForm
+                            doctor={doctor.main}
+                            onUpdate={fetchDataDoctor}
+                        />
+                    )}
+
+                    {doctor.services && (
+                        <ServicesTable services={doctor.services} />
                     )}
                 </>
             )}

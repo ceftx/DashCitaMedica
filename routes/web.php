@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DoctorServiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -46,11 +47,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/DoctorData', [ProfileController::class, 'DataDoctor'])->name('doctor.profile.data');
     Route::post('/DoctorFormUpdate', [ProfileController::class, 'DoctorFormUpdate'])->name('doctor.profile.update');
 
+
+    Route::get('/DoctorService', [DoctorServiceController::class, 'create'])->name('doctor_service.create');
+    Route::post('/DoctorService', [DoctorServiceController::class, 'store'])->name('doctor_service.store');
+
     //patient
     Route::post('/patient/new/appointment', [AppointmentController::class, 'newAppointment']);
     Route::get('/get/Appointments', [AppointmentController::class, 'getAppoinments'])->name('get.appoinments');
     Route::get('/get/Specialties', [AppointmentController::class, 'getSpecialties'])->name('get.specialties');
-
 });
 
 require __DIR__ . '/auth.php';

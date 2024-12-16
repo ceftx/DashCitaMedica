@@ -35,4 +35,20 @@ class Doctor extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'doctor_service')
+            ->withPivot('id', 'price')
+            ->withTimestamps();
+    }
+
+    public function doctorServices()
+    {
+        return $this->hasMany(DoctorService::class);
+    }
+
+    public function servicesWithCurrentDoctor()
+    {
+        return $this->doctorServices()->with('service')->get();
+    }
 }
